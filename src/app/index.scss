@@ -4,11 +4,15 @@
 
 @import url('../../public/styles/fonts.scss');
 
-* {
-  font-family: 'PT Sans';
+[data-theme="light"] {
+  --accent-color: #f3ed2b;
+  --text-color: black;
+  --border-color: #575757;
+  --base-background-color: #fff;
 }
 
-[data-theme="light"] {
-  --background-color: red;
-  --text-color: black;
+* {
+  font-family: 'PT Sans';
+  color: var(--text-color);
+  background-color: var(--base-background-color);
 }

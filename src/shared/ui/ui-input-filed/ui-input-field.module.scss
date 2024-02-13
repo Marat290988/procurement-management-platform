@@ -1,0 +1,33 @@
+.input-cont {
+  position: relative;
+  display: flex;
+
+  input {
+    border: none;
+    outline: none;
+    background-color: #fff0;
+    z-index: 1;
+    flex-grow: 1;
+
+    &:focus + .input-border {
+      border-color: var(--accent-color);
+    }
+  }
+  
+}
+
+.input-border {
+  border: 2px solid var(--border-color);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 0;
+  border-radius: 5px;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 13px;
+  margin-left: 4px;
+}
