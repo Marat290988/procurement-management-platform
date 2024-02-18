@@ -9,7 +9,10 @@
   --text-color: black;
   --border-color: #575757;
   --base-background-color: #fff;
+  --inner-background-color: #fff;
+  --base-background-hover: #f1f1f1;
   --error-color: #c33;
+  --border-var: 1px solid var(--border-color);
 }
 
 * {

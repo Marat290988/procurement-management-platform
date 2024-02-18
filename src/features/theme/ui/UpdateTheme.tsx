@@ -1,33 +1,28 @@
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-
+import { UiSelect, UiSelectType } from './../../../shared/ui/ui-select/ui-select';
+import { useState } from 'react';
 
 export function UpdateTheme() {
 
+  const options: UiSelectType['options'] = [
+    {title: 'Light', value: 'light'},
+    {title: 'Dark', value: 'dark'}
+  ]
+
+  const [themeValue, setThemeValue] = useState(options[0].value);
+
+
+  const onChangeTheme = (theme: string) => {
+    setThemeValue(theme);
+  }
+
   return (
     <div>
-      <Select>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a fruit" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value="apple">Apple</SelectItem>
-            <SelectItem value="banana">Banana</SelectItem>
-            <SelectItem value="blueberry">Blueberry</SelectItem>
-            <SelectItem value="grapes">Grapes</SelectItem>
-            <SelectItem value="pineapple">Pineapple</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <UiSelect
+        selectWidthClass='w-[90px]'
+        options={options}
+        value={themeValue}
+        onValueChange={onChangeTheme}
+      />
     </div>
   );
 }

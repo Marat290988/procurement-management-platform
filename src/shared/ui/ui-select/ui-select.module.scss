@@ -1,0 +1,74 @@
+.select-main {
+  border: var(--border-var) !important;
+  background-color: var(--inner-background-color) !important;
+
+  span {
+    background-color: var(--inner-background-color) !important;
+    color: var(--text-color);
+  }
+
+  svg {
+    background-color: var(--inner-background-color) !important;
+    stroke: var(--text-color);
+    opacity: 1;
+
+    path {
+      stroke: var(--text-color);
+    }
+  }
+}
+
+.select-content {
+  background-color: var(--inner-background-color) !important;
+}
+
+.select-group {
+  background-color: var(--inner-background-color) !important;
+
+  // div[data-state="checked"] {
+  //   // background-color: red !important;
+  // }
+
+  // div:hover {
+  //   // background-color: red !important;
+  // }
+}
+
+.select-item {
+  background-color: rgba(255, 255, 255, 0) !important;
+
+  &:hover {
+    background-color: var(--base-background-hover) !important;
+
+    span {
+      background-color: var(--base-background-hover) !important;
+      color: var(--text-color);
+    }
+  
+    svg {
+      background-color: var(--base-background-hover) !important;
+      stroke: var(--text-color);
+      opacity: 1;
+  
+      path {
+        stroke: var(--text-color);
+      }
+    }
+  }
+}
+
+.select-item[data-state="checked"] {
+  background-color: rgba(255, 255, 255, 0);
+
+    span {
+      background-color: rgba(255, 255, 255, 0);
+    }
+  
+    svg {
+      background-color: rgba(255, 255, 255, 0);
+  
+      path {
+        stroke: var(--text-color);
+      }
+    }
+}
