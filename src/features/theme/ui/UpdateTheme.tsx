@@ -1,5 +1,8 @@
+import { useAppSelector } from '@/shared/lib/redux';
+import { useThemeActions } from '../model/use-theme.actions';
 import { UiSelect, UiSelectType } from './../../../shared/ui/ui-select/ui-select';
 import { useState } from 'react';
+import { themeStore } from '../model';
 
 export function UpdateTheme() {
 
@@ -8,11 +11,11 @@ export function UpdateTheme() {
     {title: 'Dark', value: 'dark'}
   ]
 
-  const [themeValue, setThemeValue] = useState(options[0].value);
-
-
-  const onChangeTheme = (theme: string) => {
-    setThemeValue(theme);
+  const { setTheme } = useThemeActions();
+  const _theme = useAppSelector(themeStore.selectors.selectTheme);
+ 
+  const onChangeTheme = (theme: 'light' | 'dark') => {
+    setTheme(theme);
   }
 
   return (
@@ -20,7 +23,7 @@ export function UpdateTheme() {
       <UiSelect
         selectWidthClass='w-[90px]'
         options={options}
-        value={themeValue}
+        value={_theme}
         onValueChange={onChangeTheme}
       />
     </div>

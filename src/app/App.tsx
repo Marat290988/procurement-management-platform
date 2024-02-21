@@ -1,12 +1,12 @@
 import { AppRouter } from './app-router';
-import { ThemeProvider } from './app-theme';
+import { AppStore } from './app-store';
 
 function App() {
   return (
     <>
-      <ThemeProvider>
+      <AppStore>
         <AppRouter />
-      </ThemeProvider>
+      </AppStore>
     </>
   );
 }

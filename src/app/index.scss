@@ -15,6 +15,17 @@
   --border-var: 1px solid var(--border-color);
 }
 
+[data-theme="dark"] {
+  --accent-color: #25634f;
+  --text-color: #b5b5b5;
+  --border-color: #595c73;
+  --base-background-color: #081b38;
+  --inner-background-color: #14315d;
+  --base-background-hover: #282933;
+  --error-color: #c33;
+  --border-var: 1px solid var(--border-color);
+}
+
 * {
   font-family: 'PT Sans';
   color: var(--text-color);

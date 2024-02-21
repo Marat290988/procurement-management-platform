@@ -20,10 +20,16 @@
 
 .select-content {
   background-color: var(--inner-background-color) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
 }
 
 .select-group {
   background-color: var(--inner-background-color) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 5px;
 
   // div[data-state="checked"] {
   //   // background-color: red !important;
@@ -35,7 +41,22 @@
 }
 
 .select-item {
-  background-color: rgba(255, 255, 255, 0) !important;
+  background-color: var(--inner-background-color) !important;
+
+  span {
+    background-color: var(--inner-background-color) !important;
+    color: var(--text-color);
+  }
+
+  svg {
+    background-color: var(--inner-background-color) !important;
+    stroke: var(--text-color);
+    opacity: 1;
+
+    path {
+      stroke: var(--text-color);
+    }
+  }
 
   &:hover {
     background-color: var(--base-background-hover) !important;

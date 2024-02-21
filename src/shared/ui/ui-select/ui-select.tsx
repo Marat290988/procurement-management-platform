@@ -13,7 +13,7 @@ export type UiSelectType = {
   selectWidthClass: string,
   options: {value: string, title: string}[],
   value: string,
-  onValueChange: (change: string) => void
+  onValueChange: (change: any) => void
 }
 
 export function UiSelect({
