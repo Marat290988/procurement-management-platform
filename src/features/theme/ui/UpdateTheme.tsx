@@ -1,7 +1,6 @@
 import { useAppSelector } from '@/shared/lib/redux';
 import { useThemeActions } from '../model/use-theme.actions';
 import { UiSelect, UiSelectType } from './../../../shared/ui/ui-select/ui-select';
-import { useState } from 'react';
 import { themeStore } from '../model';
 
 export function UpdateTheme() {
