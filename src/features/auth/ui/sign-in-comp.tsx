@@ -2,6 +2,11 @@ import { UiInputField } from "@/shared/ui/ui-input-filed/ui-input-field";
 import { useForm } from "react-hook-form";
 import { useHandleError } from "../model/use-handle-error";
 import { UiButton } from "@/shared/ui/ui-button/ui-button";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/redux";
+import { usersStore } from "@/entities/user";
+import { useState } from "react";
+import { comparePassword } from "@/lib/utils";
+import { sessionStore } from "@/entities/session";
 
 export function SignInComp() {
 
@@ -17,11 +22,34 @@ export function SignInComp() {
     reValidateMode: "onChange",
   });
 
-  const { usernameError, passwordError } = useHandleError(formState);
+  const [submitError, setSubmitError] = 
+    useState<null | {subNameError: null | string, subPasswordError: null | string}>(null);
 
-  const onSubmit = handleSubmit(() => {
-    //console.log(errors);
+  const { usernameError, passwordError } = useHandleError(formState);
+  const _users = useAppSelector(usersStore.selectors.selectAll);
+
+  const dispatch = useAppDispatch();
+
+  const onSubmit = handleSubmit(data => {
+    const username = data.username;
+    const password = data.password;
+    const loginUser = _users.find(u => u.name === username);
+    if (!loginUser) {
+      setSubmitError((prevCount: any) => ({...prevCount, subNameError: 'Incorrect username'}));
+      return;
+    }
+    if (!comparePassword(loginUser.password, password)) {
+      setSubmitError((prevCount: any) => ({...prevCount, subPasswordError: 'Incorrect password'}));
+      return;
+    }
+    dispatch(sessionStore.actions.createSession({name: loginUser.name, userId: loginUser.id, avatarBlob: loginUser.avatarBlob}));
   });
+
+  const onInput = () => {
+    if (submitError) {
+      setSubmitError(null);
+    }
+  }
 
   return (
     <div className="flex flex-col grow items-center justify-center">
@@ -30,7 +58,7 @@ export function SignInComp() {
       >
         PLEASE LOGIN
       </div>
-      <form onSubmit={onSubmit} className="px-[45px] py-[30px] border-solid border-[2px] rounded-[5px] @apply border-[var(--border-color)]">
+      <form onSubmit={onSubmit} onInput={onInput} className="px-[45px] py-[30px] border-solid border-[2px] rounded-[5px] @apply border-[var(--border-color)]">
         <UiInputField
           inputProps={{
             type: 'text',
@@ -38,7 +66,7 @@ export function SignInComp() {
           }}
           label="Username"
           formState={formState}
-          errorMessage={usernameError}
+          errorMessage={submitError && submitError.subNameError ? submitError.subNameError : usernameError}
         />
         <UiInputField
           inputProps={{
@@ -47,7 +75,7 @@ export function SignInComp() {
           }}
           label="Password"
           formState={formState}
-          errorMessage={passwordError}
+          errorMessage={submitError && submitError.subPasswordError ? submitError.subPasswordError : passwordError}
         />
         <div className="w-full text-center mt-2">
           <UiButton variant="primary" className="mx-auto">LOGIN</UiButton>

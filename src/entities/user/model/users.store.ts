@@ -2,7 +2,6 @@ import { createAsyncThunk, createEntityAdapter, createSelector, createSlice } fr
 import { usersRepository } from "./users.repository";
 import { nanoid } from "nanoid";
 import { User } from "./types";
-import defaultImage from '../assets/avatar.svg';
 import { createBaseSelector, registerSlice } from "@/shared/lib/redux";
 import { HASH_CONST } from "@/shared/constants";
 import CryptoJS from 'crypto-js';
@@ -20,6 +19,12 @@ const loadUsers = createAsyncThunk("users/loadUsers", async () => {
   }
   return users;
 });
+
+const loginUser = createAsyncThunk('users/login', async (name: string) => {
+  const users = await usersRepository.getUsers();
+  const findUserIndex = users.findIndex(u => u.name === name);
+  return findUserIndex > 0 ? users[0] : null;
+})
 
 const createUser = createAsyncThunk(
   'users/createUser',
@@ -39,7 +44,7 @@ const removeUser = createAsyncThunk(
 );
 
 const usersAdapter = createEntityAdapter({
-  selectId: (user: User) => user.id
+  selectId: (user: User) => user.name
 });
 
 const usersSlice = createSlice({
@@ -65,7 +70,7 @@ const adapterSelectors = usersAdapter.getSelectors(usersBaseSelector);
 const selectUsersMap = createSelector(adapterSelectors.selectAll, (users) =>
   users.reduce(
     (acc, user) => {
-      acc[user.id] = user;
+      acc[user.name] = user;
       return acc;
     },
     {} as Record<string, User>,
@@ -79,6 +84,7 @@ export const usersStore = {
     loadUsers,
     createUser,
     removeUser,
+    loginUser,
   },
   selectors: {
     ...adapterSelectors,
