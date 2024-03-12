@@ -7,8 +7,11 @@ import { usersStore } from "@/entities/user";
 import { useState } from "react";
 import { comparePassword } from "@/lib/utils";
 import { sessionStore } from "@/entities/session";
+import { useTranslation } from "react-i18next";
 
 export function SignInComp() {
+
+  const { t } = useTranslation();
 
   const { register, handleSubmit, formState } = useForm<{
     username: string,
@@ -56,7 +59,7 @@ export function SignInComp() {
       <div 
         className="@apply bg-[var(--border-color)] text-[var(--base-background-color)] px-[10px] py-[5px] text-[14px] rounded-[15px] mb-[-16px] z-10"
       >
-        PLEASE LOGIN
+        {t('please_login')}
       </div>
       <form onSubmit={onSubmit} onInput={onInput} className="px-[45px] py-[30px] border-solid border-[2px] rounded-[5px] @apply border-[var(--border-color)]">
         <UiInputField
@@ -64,7 +67,7 @@ export function SignInComp() {
             type: 'text',
             ...register('username', { minLength: 5 })
           }}
-          label="Username"
+          label={t('username')}
           formState={formState}
           errorMessage={submitError && submitError.subNameError ? submitError.subNameError : usernameError}
         />
@@ -73,18 +76,18 @@ export function SignInComp() {
             type: 'password',
             ...register('password', { minLength: 5 })
           }}
-          label="Password"
+          label={t('password')}
           formState={formState}
           errorMessage={submitError && submitError.subPasswordError ? submitError.subPasswordError : passwordError}
         />
         <div className="w-full text-center mt-2">
-          <UiButton variant="primary" className="mx-auto">LOGIN</UiButton>
+          <UiButton variant="primary" className="mx-auto">{t('login')}</UiButton>
         </div>
       </form>
       <div 
         className="@apply bg-[var(--border-color)] text-[var(--base-background-color)] px-[10px] py-[5px] text-[14px] rounded-[15px] mt-[-16px] z-10"
       >
-        DEFAULT: admin / admin
+        {t('default')}
       </div>
     </div>
   );
