@@ -1,0 +1,30 @@
+.header {
+  padding-bottom: 10px;
+
+  &-inner {
+    box-shadow: var(--box-shadow-b);
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 10px;
+    gap: 10px;
+
+    &-item {
+      
+    }
+
+    &-logo {
+      background-color: #316bd9;
+      padding: 0 20px;
+      border-radius: 7px;
+      color: #a0dff9;
+      font-weight: 700;
+      border: 2px solid #a0dff9;
+    }
+  }
+}
+
+:global([data-theme="dark"]) .header-inner {
+  border-bottom: 1px solid var(--border-color);
+}

@@ -12,7 +12,7 @@ const loadUsers = createAsyncThunk("users/loadUsers", async () => {
   if (users.length === 0) {
     const ciphertext = CryptoJS.AES.encrypt('admin', HASH_CONST).toString();
     const adminUser: User = {
-      name: 'admin', id: nanoid(), avatarBlob: undefined, password: ciphertext
+      name: 'admin', id: nanoid(), avatarBlob: undefined, password: ciphertext, role: 'ADMIN'
     }
     usersRepository.addUser(adminUser);
     users.push(adminUser);
@@ -28,8 +28,8 @@ const loginUser = createAsyncThunk('users/login', async (name: string) => {
 
 const createUser = createAsyncThunk(
   'users/createUser',
-  async (data: { name: string; avatarBlob: Blob | undefined; password: string }) => {
-    const newUser = { id: nanoid(), ...data };
+  async (data: { name: string; avatarBlob: Blob | undefined; password: string; }) => {
+    const newUser = { id: nanoid(), role: 'USER', ...data } as User;
     await usersRepository.addUser(newUser);
     return newUser;
   },

@@ -11,7 +11,7 @@ export const UpdateLang = () => {
       setLang(data.lang);
       i18n.changeLanguage(data.lang);
     });
-  })
+  }, []);
 
   const [lang, setLang] = useState<LanguageState['lang']>('en');
   const { i18n } = useTranslation();

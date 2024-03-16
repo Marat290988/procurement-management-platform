@@ -22,7 +22,13 @@ export const AppLoader = ({ children }: { children?: ReactNode }) => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <div>LOADDING...</div>
+    return (
+      <div 
+        className='h-screen flex items-center justify-center text-[30px] bg-[var(--base-background-color)] color text-[var(--text-color)]'
+      >
+        LOADING...
+      </div>
+    );
   }
 
   return <>{children}</>;

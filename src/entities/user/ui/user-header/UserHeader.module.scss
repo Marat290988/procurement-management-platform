@@ -1,0 +1,28 @@
+.header-user-content {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 3px;
+
+  &__logo {
+    width: 40px;
+    height: 40px;
+
+    :global(.svg-icon) {
+      width: 100%;
+      height: 100%;
+
+      :global(path) {
+        fill: var(--border-color);
+      }
+    }
+  }
+
+  &__username {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-color);
+  }
+}

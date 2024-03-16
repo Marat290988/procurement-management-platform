@@ -13,6 +13,7 @@
   --base-background-hover: #f1f1f1;
   --error-color: #c33;
   --border-var: 1px solid var(--border-color);
+  --box-shadow-b: 0px 3px 7px -3px rgba(97,97,97,1);
 }
 
 [data-theme="dark"] {
@@ -24,6 +25,7 @@
   --base-background-hover: #282933;
   --error-color: #c33;
   --border-var: 1px solid var(--border-color);
+  --box-shadow-b: none;
 }
 
 * {
