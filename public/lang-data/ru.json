@@ -3,5 +3,7 @@
   "username": "Имя",
   "password": "Пароль",
   "login": "ВОЙТИ",
-  "default": "По умолчанию: admin / admin"
+  "default": "По умолчанию: admin / admin",
+  "profile": "Профиль",
+  "logout": "Выйти"
 }

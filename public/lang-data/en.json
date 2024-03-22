@@ -3,5 +3,7 @@
   "username": "Username",
   "password": "Password",
   "login": "LOGIN",
-  "default": "DEFAULT: admin / admin"
+  "default": "DEFAULT: admin / admin",
+  "profile": "Profile",
+  "logout": "Logout"
 }

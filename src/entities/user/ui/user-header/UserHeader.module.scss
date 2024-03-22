@@ -26,3 +26,48 @@
     color: var(--text-color);
   }
 }
+
+.pop-contnet {
+  padding: 10px;
+  box-shadow: var(--box-shadow-b);
+  border-radius: 5px;
+  min-width: 200px;
+  background-color: var(--base-background-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &-row {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: var(--base-background-hover);
+    }
+
+    &__item {
+      background-color: inherit;
+    }
+  }
+
+  &-line {
+    opacity: 0.30;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+.back-inherit {
+
+  :global(svg) {
+    background-color: inherit;
+  }
+}
+
+:global([data-theme="dark"]) .pop-contnet {
+  border: 1px solid var(--border-color);
+}
