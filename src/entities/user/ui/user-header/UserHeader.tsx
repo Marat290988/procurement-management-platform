@@ -7,6 +7,7 @@ import { UiPopover } from '@/shared/ui/ui-popover/ui-popover';
 import { useState } from 'react';
 import { UiSvg } from '@/shared/ui/ui-svg/ui-svg';
 import { useTranslation } from 'react-i18next';
+import { useModal } from '@/features/modal';
 
 export const UserHeader = () => {
 
@@ -14,9 +15,12 @@ export const UserHeader = () => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
+  const { hideModal, openModal } = useModal();
   
   const logout = () => {
-    dispatch(sessionStore.actions.removeSession());
+    setIsOpen(false);
+    openModal();
+    //dispatch(sessionStore.actions.removeSession());
   };
 
   const content = (
