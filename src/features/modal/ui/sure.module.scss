@@ -1,0 +1,21 @@
+.sure-content {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--base-background-color);
+  color: var(--text-color);
+  font-size: 20px;
+
+  &-title {
+    text-align: center;
+  }
+
+  &-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+}

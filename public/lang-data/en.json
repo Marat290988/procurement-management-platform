@@ -5,5 +5,8 @@
   "login": "LOGIN",
   "default": "DEFAULT: admin / admin",
   "profile": "Profile",
-  "logout": "Logout"
+  "logout": "Logout",
+  "yes": "Yes",
+  "cancel": "Cancel",
+  "sure": "Are you sure?"
 }

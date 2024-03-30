@@ -7,7 +7,7 @@ import { UiPopover } from '@/shared/ui/ui-popover/ui-popover';
 import { useState } from 'react';
 import { UiSvg } from '@/shared/ui/ui-svg/ui-svg';
 import { useTranslation } from 'react-i18next';
-import { useModal } from '@/features/modal';
+import { useModalSure } from '@/features/modal/ui/useModalSure';
 
 export const UserHeader = () => {
 
@@ -15,11 +15,17 @@ export const UserHeader = () => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
-  const { hideModal, openModal } = useModal();
-  
+  const { openSureModal } = useModalSure();
+  //const { hideModal, openModal } = useModal();
+
   const logout = () => {
     setIsOpen(false);
-    openModal();
+    openSureModal();
+    // openModal(
+    //   <div className={styles['sure-content']}>
+        
+    //   </div>
+    // );
     //dispatch(sessionStore.actions.removeSession());
   };
 
@@ -38,19 +44,22 @@ export const UserHeader = () => {
   );
 
   return (
-    <UiPopover 
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-      content={content}
-    >
-      <div className={clsx(styles['header-user-content'])}>
-        <div className={clsx(styles['header-user-content__logo'])}>
-          {!sessionUser?.avatarBlob && <AvatarSvg />}
+    <>
+      <UiPopover
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        content={content}
+      >
+        <div className={clsx(styles['header-user-content'])}>
+          <div className={clsx(styles['header-user-content__logo'])}>
+            {!sessionUser?.avatarBlob && <AvatarSvg />}
+          </div>
+          <div className={clsx(styles['header-user-content__username'])}>
+            {sessionUser?.name}
+          </div>
         </div>
-        <div className={clsx(styles['header-user-content__username'])}>
-          {sessionUser?.name}
-        </div>
-      </div>
-    </UiPopover>
+      </UiPopover>
+    </>
+
   )
 }

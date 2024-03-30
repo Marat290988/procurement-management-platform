@@ -5,5 +5,8 @@
   "login": "ВОЙТИ",
   "default": "По умолчанию: admin / admin",
   "profile": "Профиль",
-  "logout": "Выйти"
+  "logout": "Выйти",
+  "yes": "Да",
+  "cancel": "Отмена",
+  "sure": "Вы уверены?"
 }

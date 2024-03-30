@@ -1,11 +1,10 @@
 import clsx from "clsx";
-import { useCallback, useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import ReactDOM from 'react-dom/client';
 
 export const useModal = () => {
 
   const [isShow, setIsShow] = useState(false);
-  let tempFunc: (parametr: any) => void | undefined;
   let portalContainer = document.querySelector('body>[data-portal]');
 
   if (!portalContainer) {
@@ -14,46 +13,60 @@ export const useModal = () => {
     document.body.appendChild(portalContainer);
   }
 
-  const hideModal = (parametr?: any) => {
-    setIsShow(false);
-    // if (afterClose !== undefined) {
-    //   afterClose(parametr);
-    // }
+  const childRef = useRef<{ childMethod: () => void } | null>(null);
+
+  const [componentParametr, setComponentParametr] = useState(<div>Nothing was handed over</div>);
+
+  const hideModal = () => {
+    if (childRef.current) {
+      childRef.current.childMethod();
+      setIsShow(false);
+    }
   }
 
-  const openModal = () => {
+  const openModal = (innerComponent: JSX.Element) => {
     setIsShow(true);
-    // return {
-    //   afterClose: (func: (parametr?: any) => void) => {
-    //     tempFunc = func;
-    //   }
-    // }
+    setComponentParametr(innerComponent);
   }
 
-  // const afterClose = useCallback<(parametr: any) => void>(() => {
-  //   if (tempFunc !== undefined) {
-  //     return tempFunc;
-  //   }
-  // }, [isShow]);
+  const ModalJSX = forwardRef<{childMethod: () => void}, {injectedComponent: JSX.Element}>((props, ref) => {
+    const [modalIsShow, setModalIsShow] = useState(true);
+
+    const hideModalJSX = () => {
+      console.log('hide')
+      setModalIsShow(false);
+    }
+
+    useImperativeHandle(ref, () => ({
+      childMethod: hideModalJSX
+    }));
+
+    return <>
+      {modalIsShow && (
+        <div
+          className={clsx('h-screen w-screen bg-[#2b415754] fixed top-0 flex items-center justify-center')}
+          style={{zIndex: getMaxZIndex()}}
+          onClick={hideModal}
+        >
+          {props.injectedComponent && props.injectedComponent}
+        </div>
+      )}
+    </>;
+  })
+
+  let root = useRef<ReactDOM.Root | null>(null);
 
   useEffect(() => {
-    if (isShow) {
-      ReactDOM.createRoot(portalContainer!).render(
-        <>
-          {isShow && (
-            <div
-              className={clsx('h-screen w-screen bg-[#2b415754] fixed top-0 flex items-center justify-center')}
-              style={{zIndex: getMaxZIndex()}}
-              onClick={hideModal}
-            >
-            </div>
-          )}
-        </>
-      )
-    } else {
-      ReactDOM.createRoot(portalContainer!).render(<></>);
+    if (root.current === null && portalContainer && portalContainer.children.length === 0) {
+      root.current = ReactDOM.createRoot(portalContainer!);
+    }
+    if (isShow && portalContainer && portalContainer.children.length === 0) {
+      root.current!.render(<><ModalJSX injectedComponent={componentParametr} ref={childRef} /></>);
+    } else if (!isShow && portalContainer && portalContainer.children.length > 0) {
+      root.current!.unmount();
     }
   }, [isShow])
+
 
   return {
     hideModal, openModal
