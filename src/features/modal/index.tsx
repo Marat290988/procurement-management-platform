@@ -14,26 +14,36 @@ export const useModal = () => {
   }
 
   const childRef = useRef<{ childMethod: () => void } | null>(null);
+  const afterCloseFuncRef = useRef<{func: ((data?: any) => void) | null}>({func: null});
+  const setAfterCloseFunc = (func: (data?: any) => void) => {
+    afterCloseFuncRef.current.func = func;
+    //useImperativeHandle(afterCloseFuncRef, () => (func));
+  };
 
   const [componentParametr, setComponentParametr] = useState(<div>Nothing was handed over</div>);
 
-  const hideModal = () => {
+  const hideModal = (data?: any) => {
     if (childRef.current) {
       childRef.current.childMethod();
       setIsShow(false);
+      if (afterCloseFuncRef.current.func !== null) {
+        afterCloseFuncRef.current.func(data);
+      }
     }
   }
 
   const openModal = (innerComponent: JSX.Element) => {
     setIsShow(true);
     setComponentParametr(innerComponent);
+    return {
+      afterClose: setAfterCloseFunc
+    };
   }
 
   const ModalJSX = forwardRef<{childMethod: () => void}, {injectedComponent: JSX.Element}>((props, ref) => {
     const [modalIsShow, setModalIsShow] = useState(true);
 
     const hideModalJSX = () => {
-      console.log('hide')
       setModalIsShow(false);
     }
 
@@ -46,7 +56,7 @@ export const useModal = () => {
         <div
           className={clsx('h-screen w-screen bg-[#2b415754] fixed top-0 flex items-center justify-center')}
           style={{zIndex: getMaxZIndex()}}
-          onClick={hideModal}
+          onClick={() => hideModal()}
         >
           {props.injectedComponent && props.injectedComponent}
         </div>

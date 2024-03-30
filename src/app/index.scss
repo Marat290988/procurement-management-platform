@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('../../public/styles/fonts.scss');
+@import url('./styles/buttons.scss');
 
 [data-theme="light"] {
   --accent-color: #f3ed2b;
@@ -14,6 +15,7 @@
   --error-color: #c33;
   --border-var: 1px solid var(--border-color);
   --box-shadow-b: 0px 3px 7px -3px rgba(97,97,97,1);
+  --primary: #6ba3eb;
 }
 
 [data-theme="dark"] {
@@ -26,6 +28,7 @@
   --error-color: #c33;
   --border-var: 1px solid var(--border-color);
   --box-shadow-b: none;
+  --primary: #6ba3eb;
 }
 
 * {

@@ -20,13 +20,11 @@ export const UserHeader = () => {
 
   const logout = () => {
     setIsOpen(false);
-    openSureModal();
-    // openModal(
-    //   <div className={styles['sure-content']}>
-        
-    //   </div>
-    // );
-    //dispatch(sessionStore.actions.removeSession());
+    openSureModal().afterClose(data => {
+      if (data) {
+        dispatch(sessionStore.actions.removeSession());
+      }
+    })
   };
 
   const content = (

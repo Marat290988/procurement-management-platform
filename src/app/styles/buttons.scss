@@ -1,0 +1,15 @@
+button {
+  &.primary {
+    background-color: var(--base-background-color);
+    border: 3px solid var(--primary);
+    padding: 2px 8px;
+    border-radius: 15px;
+  }
+
+  &.warn {
+    background-color: var(--base-background-color);
+    border: 3px solid var(--error-color);
+    padding: 2px 8px;
+    border-radius: 15px;
+  }
+}
