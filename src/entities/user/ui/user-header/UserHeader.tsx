@@ -16,7 +16,6 @@ export const UserHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
   const { openSureModal } = useModalSure();
-  //const { hideModal, openModal } = useModal();
 
   const logout = () => {
     setIsOpen(false);
