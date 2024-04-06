@@ -10,5 +10,10 @@
     box-shadow: 3px 6px 6px -2px var(--shadow);
     position: absolute;
     padding: 5px;
+    transition: width 0.4s ease-in-out;
+  }
+
+  &-inner.opened {
+    width: 200px;
   }
 }
