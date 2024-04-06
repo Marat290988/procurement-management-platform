@@ -12,5 +12,10 @@ export const ICONS = {
       <path d="M10 8H2.41333" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M3.89996 5.76758L1.66663 8.00091L3.89996 10.2342" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
+  `,
+  OPENMENU: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+      <path fill="currentColor" d="m4.296 12l8.492-8.727a.75.75 0 1 0-1.075-1.046l-9 9.25a.75.75 0 0 0 0 1.046l9 9.25a.75.75 0 1 0 1.075-1.046z"/>
+    </svg>
   `
 };

@@ -1,7 +1,8 @@
+import clsx from "clsx";
 
 export function MainPage() {
   return(
-    <div>
+    <div className={clsx('grow')}>
       MAIN
     </div>
   );

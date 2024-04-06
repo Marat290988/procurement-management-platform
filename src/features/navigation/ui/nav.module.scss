@@ -1,0 +1,14 @@
+.nav-content {
+  margin-top: -9px;
+  min-width: 40px;
+  position: relative;
+  background-color: var(--base-background-color);
+
+  &-inner {
+    height: 100%;
+    width: 100%;
+    box-shadow: 3px 6px 6px -2px var(--shadow);
+    position: absolute;
+    padding: 5px;
+  }
+}
