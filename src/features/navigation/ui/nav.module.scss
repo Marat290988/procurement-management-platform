@@ -11,9 +11,21 @@
     position: absolute;
     padding: 5px;
     transition: width 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+
+    p {
+      display: none;
+    }
   }
 
   &-inner.opened {
     width: 200px;
+
+    p {
+      display: block;
+    }
   }
 }

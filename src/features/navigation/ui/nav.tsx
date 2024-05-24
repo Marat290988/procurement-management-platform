@@ -2,6 +2,7 @@ import { FC, useRef } from "react";
 import styles from './nav.module.scss';
 import clsx from "clsx";
 import { NavArrow } from "./nav-arrow/nav-arrow";
+import { Users } from "lucide-react";
 
 export const Nav: FC<{}> = () => {
 
@@ -30,6 +31,12 @@ export const Nav: FC<{}> = () => {
     <div className={clsx(styles['nav-content'])}>
       <div className={clsx(styles['nav-content-inner'])} ref={refInner}>
         <NavArrow toggleNav={toggleNav} refChildMethods={refChildMethods} />
+        <div className={clsx(styles['nav-content-inner__item'], 'flex', 'gap-1')}>
+          <div className="flex min-w-[30px] justify-center">
+            <Users color="var(--primary)" size={20} />
+          </div>
+          <p className="text-[16px] font-bold text-[var(--primary)]">Users</p>
+        </div>
       </div>
     </div>
   )
