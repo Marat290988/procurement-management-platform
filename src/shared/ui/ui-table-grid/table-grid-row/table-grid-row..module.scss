@@ -1,0 +1,22 @@
+.row {
+  display: grid;
+
+
+  .cell {
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    
+    text-align: center;
+    font-size: 16px;
+    line-height: 17px;
+  }
+
+  .cell:first-of-type {
+    border-left: 1px solid var(--border-color);
+  }
+
+  &:last-of-type .cell {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+}

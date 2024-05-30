@@ -29,3 +29,7 @@
     }
   }
 }
+
+[data-theme="dark"] .nav-content-inner {
+  border-right: 1px solid var(--border-color);
+}

@@ -8,5 +8,11 @@
   "logout": "Logout",
   "yes": "Yes",
   "cancel": "Cancel",
-  "sure": "Are you sure?"
+  "sure": "Are you sure?",
+  "user_manage": "User management",
+  "menu_user": "Users",
+  "manage_id": "Id",
+  "manage_name": "Name",
+  "manage_avatar": "Photo",
+  "manage_password": "Password"
 }

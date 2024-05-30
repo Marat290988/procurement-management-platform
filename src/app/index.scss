@@ -14,9 +14,10 @@
   --base-background-hover: #f1f1f1;
   --error-color: #c33;
   --border-var: 1px solid var(--border-color);
-  --box-shadow-b: 0px 3px 7px -3px rgba(97,97,97,1);
+  --box-shadow-b: 1px -1px 5px rgba(0, 0, 0, 0.5);
   --primary: #6ba3eb;
   --shadow: #7070704d;
+  --pink: #ffe8f5;
 }
 
 [data-theme="dark"] {
@@ -111,4 +112,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.main-page {
+  width: calc(100% - 40px);
 }

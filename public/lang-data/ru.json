@@ -8,5 +8,11 @@
   "logout": "Выйти",
   "yes": "Да",
   "cancel": "Отмена",
-  "sure": "Вы уверены?"
+  "sure": "Вы уверены?",
+  "user_manage": "Управление пользователями",
+  "menu_user": "Пользователи",
+  "manage_id": "Идентификатор",
+  "manage_name": "Имя",
+  "manage_avatar": "Фото",
+  "manage_password": "Пароль"
 }

@@ -1,0 +1,9 @@
+.avatar-content {
+  display: flex;
+  justify-content: center;
+
+  &__default {
+    height: 50px;
+    width: auto;
+  }
+}

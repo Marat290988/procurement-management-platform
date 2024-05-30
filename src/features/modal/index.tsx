@@ -7,11 +7,18 @@ export const useModal = () => {
   const [isShow, setIsShow] = useState(false);
   let portalContainer = document.querySelector('body>[data-portal]');
 
-  if (!portalContainer) {
-    portalContainer = document.createElement('div');
-    portalContainer.setAttribute('data-portal', '');
-    document.body.appendChild(portalContainer);
-  }
+  useEffect(() => {
+    if (!portalContainer) {
+      portalContainer = document.createElement('div');
+      portalContainer.setAttribute('data-portal', '');
+      document.body.appendChild(portalContainer);
+    }
+    return () => {
+      portalContainer?.remove();
+    }
+  }, []);
+
+
 
   const childRef = useRef<{ childMethod: () => void } | null>(null);
   const afterCloseFuncRef = useRef<{func: ((data?: any) => void) | null}>({func: null});
