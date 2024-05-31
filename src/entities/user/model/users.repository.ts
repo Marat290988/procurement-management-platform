@@ -17,5 +17,13 @@ export const usersRepository = {
       USERS_STORAGE_KEY,
       users.filter((user) => user.id !== userId),
     );
+  },
+  editUser: async (editUser: User) => {
+    const users = await usersRepository.getUsers();
+    const findIndex = users.findIndex(u => u.id === editUser.id);
+    if (findIndex !== -1) {
+      users[findIndex] = editUser;
+      await persistStorage.setItemSafe(USERS_STORAGE_KEY, users);
+    }
   }
 }

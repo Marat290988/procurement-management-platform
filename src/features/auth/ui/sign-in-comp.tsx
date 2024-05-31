@@ -45,7 +45,7 @@ export function SignInComp() {
       setSubmitError((prevCount: any) => ({...prevCount, subPasswordError: 'Incorrect password'}));
       return;
     }
-    dispatch(sessionStore.actions.createSession({name: loginUser.name, userId: loginUser.id, avatarBlob: loginUser.avatarBlob}));
+    dispatch(sessionStore.actions.createSession({name: loginUser.name, userId: loginUser.id, avatar: loginUser.avatar}));
   });
 
   const onInput = () => {

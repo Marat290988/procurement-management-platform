@@ -1,6 +1,6 @@
 export type Session = {
   id: string,
   name: string,
-  avatarBlob: Blob | undefined,
+  avatar: string | undefined,
   userId: string
 }

@@ -1,6 +1,6 @@
 export type User = {
   id: string,
-  avatarBlob: Blob | undefined,
+  avatar: string | undefined,
   name: string,
   password: string,
   role: 'ADMIN' | 'USER'

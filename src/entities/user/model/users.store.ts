@@ -2,17 +2,16 @@ import { createAsyncThunk, createEntityAdapter, createSelector, createSlice } fr
 import { usersRepository } from "./users.repository";
 import { nanoid } from "nanoid";
 import { User } from "./types";
-import { createBaseSelector, registerSlice } from "@/shared/lib/redux";
+import { createBaseSelector, registerSlice, useAppDispatch } from "@/shared/lib/redux";
 import { HASH_CONST } from "@/shared/constants";
 import CryptoJS from 'crypto-js';
-
 
 const loadUsers = createAsyncThunk("users/loadUsers", async () => {
   const users = await usersRepository.getUsers();
   if (users.length === 0) {
     const ciphertext = CryptoJS.AES.encrypt('admin', HASH_CONST).toString();
     const adminUser: User = {
-      name: 'admin', id: nanoid(), avatarBlob: undefined, password: ciphertext, role: 'ADMIN'
+      name: 'admin', id: nanoid(), avatar: undefined, password: ciphertext, role: 'ADMIN'
     }
     usersRepository.addUser(adminUser);
     users.push(adminUser);
@@ -23,12 +22,12 @@ const loadUsers = createAsyncThunk("users/loadUsers", async () => {
 const loginUser = createAsyncThunk('users/login', async (name: string) => {
   const users = await usersRepository.getUsers();
   const findUserIndex = users.findIndex(u => u.name === name);
-  return findUserIndex > 0 ? users[0] : null;
+  return findUserIndex > 0 ? users[findUserIndex] : null;
 })
 
 const createUser = createAsyncThunk(
   'users/createUser',
-  async (data: { name: string; avatarBlob: Blob | undefined; password: string; }) => {
+  async (data: { name: string; avatar: string | undefined; password: string; }) => {
     const newUser = { id: nanoid(), role: 'USER', ...data } as User;
     await usersRepository.addUser(newUser);
     return newUser;
@@ -42,6 +41,19 @@ const removeUser = createAsyncThunk(
     return userId;
   },
 );
+
+const editUser = createAsyncThunk(
+  'users/editUser',
+  async (data: {value: any, field: string, id: string}) => {
+    const users = await usersRepository.getUsers();
+    const findUser = users.find(u => u.id === data.id);
+    if (findUser) {
+      findUser[data.field as keyof User] = data.value;
+      await usersRepository.editUser(findUser);
+    }
+    return users;
+  }
+)
 
 const usersAdapter = createEntityAdapter({
   selectId: (user: User) => user.name
@@ -61,6 +73,9 @@ const usersSlice = createSlice({
     builder.addCase(removeUser.fulfilled, (state, action) => {
       usersAdapter.removeOne(state, action.payload);
     });
+    builder.addCase(editUser.fulfilled, (state, action) => {
+      usersAdapter.setAll(state, action.payload);
+    })
   }
 });
 
@@ -85,6 +100,7 @@ export const usersStore = {
     createUser,
     removeUser,
     loginUser,
+    editUser,
   },
   selectors: {
     ...adapterSelectors,

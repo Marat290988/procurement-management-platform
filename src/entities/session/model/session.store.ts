@@ -4,9 +4,9 @@ import { nanoid } from "nanoid";
 import { sessionRepository } from "./session.repository";
 import { createBaseSelector, registerSlice } from "@/shared/lib/redux";
 
-type CreateSessionData = {
+export type CreateSessionData = {
   name: string;
-  avatarBlob: Blob | undefined;
+  avatar: string | undefined;
   userId: string;
 };
 
@@ -37,6 +37,13 @@ const removeSession = createAsyncThunk('session/removeSession', async () => {
   return;
 });
 
+const updateAvatar = createAsyncThunk('session/updateAvatar', async (data: {value: any, field: keyof CreateSessionData}) => {
+  const session = await sessionRepository.getSession();
+  session![data.field] = data.value;
+  await sessionRepository.saveSession(session!);
+  return session;
+})
+
 const sessionSlice = createSlice({
   name: 'session',
   reducers: {},
@@ -51,6 +58,9 @@ const sessionSlice = createSlice({
     builder.addCase(createSession.fulfilled, (state, action) => {
       state.currentSession = action.payload;
     });
+    builder.addCase(updateAvatar.fulfilled, (state, action) => {
+      state.currentSession = action.payload;
+    });
   })
 });
 
@@ -63,6 +73,7 @@ export const sessionStore = {
     loadSession,
     removeSession,
     createSession,
+    updateAvatar,
   },
   selectors: {
     selectSession: createSelector(baseSelector, (s) => s.currentSession),

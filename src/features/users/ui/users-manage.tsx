@@ -1,6 +1,8 @@
+import { sessionStore } from "@/entities/session";
+import { CreateSessionData } from "@/entities/session/model/session.store";
 import { usersStore } from "@/entities/user";
 import { cn } from "@/lib/utils";
-import { useAppSelector } from "@/shared/lib/redux";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/redux";
 import { UiImage } from "@/shared/ui/ui-avatar/ui-image";
 import { ICell } from "@/shared/ui/ui-table-grid/table-grid-row/table-grid-row";
 import { cellStyleBody, cellStyleHeader } from "@/shared/ui/ui-table-grid/table.contants";
@@ -12,6 +14,15 @@ import { useTranslation } from "react-i18next";
 export const UsersManage = () => {
   const { t } = useTranslation();
   const _users = useAppSelector(usersStore.selectors.selectAll);
+  const sessionUser = useAppSelector(sessionStore.selectors.selectSession);
+  const dispatch = useAppDispatch();
+
+  const editUserAvatar = (value: string, field: string, id: string) => {
+    dispatch(usersStore.actions.editUser({value, field, id}));
+    if (sessionUser?.userId === id) {
+      dispatch(sessionStore.actions.updateAvatar({field: field as keyof CreateSessionData, value}));
+    }
+  }
   
   const header: ICell[] = [
     {
@@ -53,7 +64,7 @@ export const UsersManage = () => {
         {
           size: 'auto',
           value: 'minmax(70px, 70px)',
-          component: <UiImage isEdit={true} />,
+          component: <UiImage isEdit={true} editFunc={editUserAvatar} field="avatar" id={u.id} base64={u.avatar} />,
           styles: cellStyleBody
         },
         {

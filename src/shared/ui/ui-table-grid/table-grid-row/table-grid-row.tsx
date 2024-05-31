@@ -6,7 +6,7 @@ export interface ICell {
   value: string,
   styles?: CSSProperties,
   size: string,
-  component?: JSX.Element
+  component?: JSX.Element,
 }
 
 export function UiTableGridRow({dataRow, gridWidth}: {dataRow: ICell[], gridWidth: string}) {

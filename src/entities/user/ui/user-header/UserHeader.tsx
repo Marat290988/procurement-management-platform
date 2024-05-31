@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { UiSvg } from '@/shared/ui/ui-svg/ui-svg';
 import { useTranslation } from 'react-i18next';
 import { useModalSure } from '@/features/modal/ui/useModalSure';
+import { UiImage } from '@/shared/ui/ui-avatar/ui-image';
 
 export const UserHeader = () => {
 
@@ -49,7 +50,8 @@ export const UserHeader = () => {
       >
         <div className={clsx(styles['header-user-content'])}>
           <div className={clsx(styles['header-user-content__logo'])}>
-            {!sessionUser?.avatarBlob && <AvatarSvg />}
+            {!sessionUser?.avatar && <AvatarSvg />}
+            {sessionUser?.avatar && <UiImage base64={sessionUser?.avatar} size={{height: '40px',width: 'auto'}} />}
           </div>
           <div className={clsx(styles['header-user-content__username'])}>
             {sessionUser?.name}
