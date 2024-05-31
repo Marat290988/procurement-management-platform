@@ -30,7 +30,9 @@ export const Nav: FC<{}> = () => {
   const toggleNav = (state: boolean) => {
     if (state) {
       refInner.current!.classList.add(styles.opened);
-      window.addEventListener('click', windowClickCallback);
+      setTimeout(() => {
+        window.addEventListener('click', windowClickCallback);
+      }, 10);
     } else {
       refInner.current!.classList.remove(styles.opened);
     }
