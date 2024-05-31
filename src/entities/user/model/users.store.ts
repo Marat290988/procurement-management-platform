@@ -2,7 +2,7 @@ import { createAsyncThunk, createEntityAdapter, createSelector, createSlice } fr
 import { usersRepository } from "./users.repository";
 import { nanoid } from "nanoid";
 import { User } from "./types";
-import { createBaseSelector, registerSlice, useAppDispatch } from "@/shared/lib/redux";
+import { createBaseSelector, registerSlice } from "@/shared/lib/redux";
 import { HASH_CONST } from "@/shared/constants";
 import CryptoJS from 'crypto-js';
 
