@@ -8,7 +8,7 @@ i18n
   .init({
     resources: {
       en: { ...enJSON },
-      pt: { ...ruJSON },
+      ru: { ...ruJSON },
     },
     lng: "en",
     // lng: 'en',
@@ -24,16 +24,19 @@ i18n
     // }
   });
 
-fetch('./lang-data/en.json')
-  .then(response => response.json())
-  .then(data => {
-    i18n.addResourceBundle('en', 'translation', data);
-  });
+i18n.addResourceBundle('en', 'translation', enJSON);
+i18n.addResourceBundle('ru', 'translation', ruJSON);
 
-fetch('./lang-data/ru.json')
-  .then(response => response.json())
-  .then(data => {
-    i18n.addResourceBundle('ru', 'translation', data);
-  });
+// fetch('./lang-data/en.json')
+//   .then(response => response.json())
+//   .then(data => {
+//     i18n.addResourceBundle('en', 'translation', data);
+//   });
+
+// fetch('./lang-data/ru.json')
+//   .then(response => response.json())
+//   .then(data => {
+//     i18n.addResourceBundle('ru', 'translation', data);
+//   });
 
 export default i18n;
