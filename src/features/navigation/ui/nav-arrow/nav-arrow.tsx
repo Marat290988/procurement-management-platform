@@ -15,7 +15,12 @@ export const NavArrow: FC<{
     });
   }
 
-  refChildMethods.current = {toggle: toggleIcon};
+  const closeIcon = () => {
+    setIsOpen(false);
+    toggleNav(false);
+  }
+
+  refChildMethods.current = {toggle: closeIcon};
 
   return(
     <div className={clsx(styles['arrow-content'], isOpen && styles['opened'])} onClick={toggleIcon}>
