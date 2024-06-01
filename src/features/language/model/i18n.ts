@@ -1,20 +1,27 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import enJSON from './lang-data/en.json'
+import ruJSON from './lang-data/ru.json'
 
 i18n
   .use(initReactI18next)
   .init({
-    lng: 'en',
-    fallbackLng: 'en',
-    interpolation: {
-      escapeValue: false,
+    resources: {
+      en: { ...enJSON },
+      pt: { ...ruJSON },
     },
-    react: {
-      useSuspense: false,
-    },
-    backend: {
-      loadPath: './lang-data/{{ns}}.json',
-    }
+    lng: "en",
+    // lng: 'en',
+    // fallbackLng: 'en',
+    // interpolation: {
+    //   escapeValue: false,
+    // },
+    // react: {
+    //   useSuspense: false,
+    // },
+    // backend: {
+    //   loadPath: './lang-data/{{ns}}.json',
+    // }
   });
 
 fetch('./lang-data/en.json')
