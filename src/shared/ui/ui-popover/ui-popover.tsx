@@ -15,7 +15,7 @@ export const UiPopover = (
         <PopoverTrigger asChild>
           {children}
         </PopoverTrigger>
-        <PopoverContent className={cn(styles.content)}>
+        <PopoverContent className={cn(styles.content)} style={{zIndex: 100}}>
           {content}
         </PopoverContent>
       </Popover>

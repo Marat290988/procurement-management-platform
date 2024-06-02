@@ -3,6 +3,8 @@ import styles from './ui-image.module.scss';
 import { Pencil } from 'lucide-react';
 import { useRef } from 'react';
 import { toBase64 } from '@/shared/lib/utils';
+import { useAppDispatch } from '@/shared/lib/redux';
+import { notificationStore } from '@/features/notification/model/notification.store';
 
 interface IUiImage {
   base64?: string, 
@@ -15,6 +17,7 @@ interface IUiImage {
 
 export function UiImage({ base64, isEdit, editFunc, field, id, size }: IUiImage) {
 
+  const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const editImage = () => {
     inputRef.current?.click();
@@ -25,6 +28,7 @@ export function UiImage({ base64, isEdit, editFunc, field, id, size }: IUiImage)
       event.target.value = '';
       toBase64(file, 80).then(img => {
         editFunc!(img, field!, id);
+        dispatch(notificationStore.actions.addNotificationWithTimeout({id: '', message: 'Аватар изменен', type: 'success', ms: 100000}));
       });
     }
   }
