@@ -51,7 +51,7 @@ export const UserHeader = () => {
         <div className={clsx(styles['header-user-content'])}>
           <div className={clsx(styles['header-user-content__logo'])}>
             {!sessionUser?.avatar && <AvatarSvg />}
-            {sessionUser?.avatar && <UiImage base64={sessionUser?.avatar} size={{height: '40px',width: 'auto'}} />}
+            {sessionUser?.avatar && <UiImage base64={sessionUser?.avatar} size={{height: '40px',width: '40px'}} />}
           </div>
           <div className={clsx(styles['header-user-content__username'])}>
             {sessionUser?.name}

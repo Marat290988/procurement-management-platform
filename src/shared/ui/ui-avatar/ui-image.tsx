@@ -15,7 +15,7 @@ interface IUiImage {
   size?: {width: string, height: string}
 }
 
-export function UiImage({ base64, isEdit, editFunc, field, id, size }: IUiImage) {
+export function UiImage({ base64, isEdit, editFunc, field, id, size = {width: '40px', height: '40px'} }: IUiImage) {
 
   const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -47,7 +47,7 @@ export function UiImage({ base64, isEdit, editFunc, field, id, size }: IUiImage)
             className={cn(styles['avatar-content__default'])} 
             src='/images/user.png' 
             style={size && {
-              width: size.width,
+              minWidth: size.width,
               height: size.height
             }}
           />
