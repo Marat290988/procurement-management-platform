@@ -35,6 +35,11 @@
     &.warn {
       border-left: 8px solid #ffc107;
     }
+
+    .notification-close {
+      margin-left: auto;
+      cursor: pointer;
+    }
   }
 
 }

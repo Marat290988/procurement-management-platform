@@ -27,6 +27,10 @@
     font-weight: 700;
     color: var(--primary);
     text-decoration: underline;
+
+    @media (max-width: 430px) {
+      display: none;
+    }
   }
 }
 

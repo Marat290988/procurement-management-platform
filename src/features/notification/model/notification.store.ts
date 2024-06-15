@@ -48,7 +48,8 @@ registerSlice([notificationSlice]);
 
 export const notificationStore = {
   actions: {
-    addNotificationWithTimeout
+    addNotificationWithTimeout,
+    removeNotification: notificationSlice.actions.removeNotification
   },
   selectors: {
     noteData: createSelector(baseSelector, (s) => s.note),
