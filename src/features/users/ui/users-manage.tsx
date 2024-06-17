@@ -4,6 +4,7 @@ import { usersStore } from "@/entities/user";
 import { cn } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/redux";
 import { UiImage } from "@/shared/ui/ui-avatar/ui-image";
+import { UiGridInput } from "@/shared/ui/ui-grid-input/ui-grid-input";
 import { ICell } from "@/shared/ui/ui-table-grid/table-grid-row/table-grid-row";
 import { cellStyleBody, cellStyleHeader } from "@/shared/ui/ui-table-grid/table.contants";
 import { UiTableGrid } from "@/shared/ui/ui-table-grid/ui-table-grid";
@@ -50,6 +51,9 @@ export const UsersManage = () => {
   const body = useMemo(() => {
     const _body: ICell[][] = [];
     _users.forEach((u, index) => {
+      const editName = (value: string) => {
+        dispatch(usersStore.actions.editUser({value, field: 'name', id: u.id}));
+      }
       const cell: ICell[] = [
         {
           size: '1fr',
@@ -59,7 +63,8 @@ export const UsersManage = () => {
         {
           size: '1fr',
           value: u.name,
-          styles: cellStyleBody
+          styles: cellStyleBody,
+          component: <UiGridInput value={u.name} isEdit={true} saveValue={editName} />
         },
         {
           size: 'auto',
