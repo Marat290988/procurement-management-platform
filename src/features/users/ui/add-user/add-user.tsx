@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 export const AddUser = ({ hideModal }: {hideModal: (state?: boolean) => void}) => {
   const { t } = useTranslation();
+  console.log(hideModal)
 
   return (
     <form className={cn(styles['add-user-content'])} onClick={event => event.stopPropagation()}>

@@ -5,7 +5,6 @@ import { useModal } from "@/features/modal";
 import { cn } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/redux";
 import { UiImage } from "@/shared/ui/ui-avatar/ui-image";
-import { UiButton } from "@/shared/ui/ui-button/ui-button";
 import { UiGridInput } from "@/shared/ui/ui-grid-input/ui-grid-input";
 import { UiGridPassword } from "@/shared/ui/ui-grid-password/ui-grid-password";
 import { ICell } from "@/shared/ui/ui-table-grid/table-grid-row/table-grid-row";
