@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/redux";
 import { UiImage } from "@/shared/ui/ui-avatar/ui-image";
 import { UiGridInput } from "@/shared/ui/ui-grid-input/ui-grid-input";
+import { UiGridPassword } from "@/shared/ui/ui-grid-password/ui-grid-password";
 import { ICell } from "@/shared/ui/ui-table-grid/table-grid-row/table-grid-row";
 import { cellStyleBody, cellStyleHeader } from "@/shared/ui/ui-table-grid/table.contants";
 import { UiTableGrid } from "@/shared/ui/ui-table-grid/ui-table-grid";
@@ -54,6 +55,9 @@ export const UsersManage = () => {
       const editName = (value: string) => {
         dispatch(usersStore.actions.editUser({value, field: 'name', id: u.id}));
       }
+      const changePassword = (value: string) => {
+        dispatch(usersStore.actions.editPassword({value, id: u.id}));
+      }
       const cell: ICell[] = [
         {
           size: '1fr',
@@ -75,7 +79,8 @@ export const UsersManage = () => {
         {
           size: '1fr',
           value: '******',
-          styles: cellStyleBody
+          styles: cellStyleBody,
+          component: <UiGridPassword savePassword={changePassword} />
         }
       ]
       if (index === _users.length - 1) {

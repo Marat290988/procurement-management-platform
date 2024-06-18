@@ -55,6 +55,20 @@ const editUser = createAsyncThunk(
   }
 )
 
+const editPassword = createAsyncThunk(
+  'users/editPassword',
+  async (data: {value: string, id: string}) => {
+    const users = await usersRepository.getUsers();
+    const findUser = users.find(u => u.id === data.id);
+    if (findUser) {
+      const ciphertext = CryptoJS.AES.encrypt(data.value, HASH_CONST).toString();
+      findUser.password = ciphertext;
+      await usersRepository.editUser(findUser);
+    }
+    return users;
+  }
+)
+
 const usersAdapter = createEntityAdapter({
   selectId: (user: User) => user.name
 });
@@ -74,6 +88,9 @@ const usersSlice = createSlice({
       usersAdapter.removeOne(state, action.payload);
     });
     builder.addCase(editUser.fulfilled, (state, action) => {
+      usersAdapter.setAll(state, action.payload);
+    });
+    builder.addCase(editPassword.fulfilled, (state, action) => {
       usersAdapter.setAll(state, action.payload);
     })
   }
@@ -101,6 +118,7 @@ export const usersStore = {
     removeUser,
     loginUser,
     editUser,
+    editPassword,
   },
   selectors: {
     ...adapterSelectors,

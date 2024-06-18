@@ -22,7 +22,7 @@ export function UiGridInput({ value, isEdit, saveValue }: IUiGridInput) {
 
   const changeMode = (state: boolean) => {
     setEditMode(state);
-    if (!state && editValue !== 's' && saveValue) {
+    if (!state && editValue !== '' && saveValue) {
       saveValue(editValue as string);
     }
   }
