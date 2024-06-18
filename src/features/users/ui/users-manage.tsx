@@ -1,9 +1,11 @@
 import { sessionStore } from "@/entities/session";
 import { CreateSessionData } from "@/entities/session/model/session.store";
 import { usersStore } from "@/entities/user";
+import { useModal } from "@/features/modal";
 import { cn } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/shared/lib/redux";
 import { UiImage } from "@/shared/ui/ui-avatar/ui-image";
+import { UiButton } from "@/shared/ui/ui-button/ui-button";
 import { UiGridInput } from "@/shared/ui/ui-grid-input/ui-grid-input";
 import { UiGridPassword } from "@/shared/ui/ui-grid-password/ui-grid-password";
 import { ICell } from "@/shared/ui/ui-table-grid/table-grid-row/table-grid-row";
@@ -12,6 +14,7 @@ import { UiTableGrid } from "@/shared/ui/ui-table-grid/ui-table-grid";
 import clsx from "clsx";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { AddUser } from "./add-user/add-user";
 
 export const UsersManage = () => {
   const { t } = useTranslation();
@@ -92,12 +95,18 @@ export const UsersManage = () => {
     return _body;
   }, [_users])
 
+  const { openModal, hideModal } = useModal();
+  const openAddUser = () => {
+    openModal(<AddUser hideModal={hideModal} />)
+  };
+
   return (
     <div className="user-manage-content overflow-auto h-full">
       <h3 className={clsx('text-center font-bold text-[var(--primary)]')}>{t('user_manage')}</h3>
       <div className={cn('min-w-[650px]')}>
         <UiTableGrid header={header} body={body} />
       </div>
+      <button className="primary mt-4 text-[12px]" onClick={() => openAddUser()}>{t('manage_add_user')}</button>
     </div>
   )
 }

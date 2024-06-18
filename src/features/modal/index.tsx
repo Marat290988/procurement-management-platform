@@ -93,7 +93,7 @@ export const useModal = () => {
 
 const getMaxZIndex = (): number => {
   let zIndex = 1;
-  Array.from(document.querySelectorAll("body>[data-portal]>*")).forEach(
+  Array.from(document.querySelectorAll("*")).forEach(
     el => {
       zIndex = 
         +window.getComputedStyle(el).getPropertyValue("z-index") > zIndex ?
@@ -101,5 +101,5 @@ const getMaxZIndex = (): number => {
         zIndex + 1
     }
   );
-  return zIndex;
+  return zIndex + 1;
 }

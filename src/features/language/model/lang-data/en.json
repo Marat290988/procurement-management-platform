@@ -14,5 +14,6 @@
   "manage_id": "Id",
   "manage_name": "Name",
   "manage_avatar": "Photo",
-  "manage_password": "Password"
+  "manage_password": "Password",
+  "manage_add_user": "Add user"
 }
